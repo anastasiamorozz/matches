@@ -1,26 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+// src/App.tsx
+import React, { useState } from 'react';
+import GameSetup from './components/GameSetup';
+import Game from './components/Game';
+import ResultScreen from './components/ResultScreen';
 
-function App() {
+const App: React.FC = () => {
+  const [gameConfig, setGameConfig] = useState<{
+    firstTurn: 'player' | 'computer';
+    matches: number;
+    maxTake: number;
+  } | null>(null);
+
+  const [winner, setWinner] = useState<'player' | 'computer' | 'draw' | null>(null);
+
+  const startGame = (firstTurn: 'player' | 'computer', matches: number, maxTake: number) => {
+    setGameConfig({ firstTurn, matches, maxTake });
+    setWinner(null); 
+  };
+
+  const handleGameOver = (winner: 'player' | 'computer' | 'draw') => {
+    setWinner(winner); 
+    setGameConfig(null);
+  };
+
+  const restartGame = () => {
+    setWinner(null);
+    setGameConfig(null);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {!gameConfig && !winner ? (
+        <GameSetup onStartGame={startGame} />
+      ) : winner ? (
+        <ResultScreen winner={winner} onRestart={restartGame} />
+      ) : (
+        <Game
+          firstTurn={gameConfig!.firstTurn}
+          matches={gameConfig!.matches}
+          maxTake={gameConfig!.maxTake}
+          onGameOver={handleGameOver}
+        />
+      )}
     </div>
   );
-}
+};
 
 export default App;
