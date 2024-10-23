@@ -14,11 +14,17 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ winner, onRestart }) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-yellow-50 p-6">
-      <h1 className="text-3xl font-bold text-yellow-700 mb-8">{getMessage()}</h1>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-[#1E1E1E] p-6">
+      <h1 
+        className="text-3xl font-bold text-[#DE00FF] mb-8"
+        style={{ textShadow: '1px 1px 2px black' }}
+      >
+        {getMessage()}
+      </h1>
       <button
         onClick={onRestart}
-        className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700"
+        className="px-6 py-3 rounded-lg text-xl font-bold bg-[#DE00FF] text-white hover:bg-[#8000FF] transition duration-300"
+        style={{ textShadow: '1px 1px 2px black' }}
       >
         Play Again
       </button>
