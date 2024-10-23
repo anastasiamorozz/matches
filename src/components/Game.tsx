@@ -43,7 +43,7 @@ const Game: React.FC<GameProps> = ({ firstTurn, matches, maxTake, onGameOver }) 
       const computerWins = computerMatches % 2 === 0;
 
       if (playerWins && computerWins) {
-        onGameOver('computer'); // Пріоритет перемоги у комп'ютера
+        onGameOver('draw'); // Пріоритет перемоги у комп'ютера
       } else if (playerWins) {
         onGameOver('player');
       } else {
