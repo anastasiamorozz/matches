@@ -7,15 +7,15 @@ const Game: React.FC<GameProps> = ({ firstTurn, matches, maxTake, onGameOver }) 
   const [playerMatches, setPlayerMatches] = useState(0);
   const [computerMatches, setComputerMatches] = useState(0);
   const [turn, setTurn] = useState<'player' | 'computer'>(firstTurn);
-  const [isWaiting, setIsWaiting] = useState(false); 
+  const [isWaiting, setIsWaiting] = useState(false);
 
   useEffect(() => {
     if (turn === 'computer') {
-      setIsWaiting(true); 
+      setIsWaiting(true);
       const timeout = setTimeout(() => {
         const computerMove = getComputerMove();
         makeMove('computer', computerMove);
-        setIsWaiting(false); 
+        setIsWaiting(false);
       }, 1500); // Затримка в 1.5 секунди
 
       return () => clearTimeout(timeout);
@@ -39,15 +39,15 @@ const Game: React.FC<GameProps> = ({ firstTurn, matches, maxTake, onGameOver }) 
     setAvailableMatches(newMatches);
 
     if (newMatches === 0) {
-      const playerWins = playerMatches % 2 === 0;
-      const computerWins = computerMatches % 2 === 0;
-
-      if (playerWins && computerWins) {
-        onGameOver('draw'); // Пріоритет перемоги у комп'ютера
-      } else if (playerWins) {
-        onGameOver('player');
+      // Перевірка перемоги після оновлення сірників
+      const matches = (player=='player') ? computerMatches + taken : playerMatches + taken
+      console.log('player'+player+'matches'+matches);
+      const playerWins = (player === 'player' && matches % 2 === 0) || 
+                         (player === 'computer' && matches % 2 !== 0);
+      if (playerWins) {
+        onGameOver(player);
       } else {
-        onGameOver('computer');
+        onGameOver('computer')
       }
     } else {
       setTurn(player === 'player' ? 'computer' : 'player');

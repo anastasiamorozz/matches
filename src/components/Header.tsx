@@ -4,11 +4,11 @@ function Header() {
     return (
         <div 
             className="h-[800px] bg-cover bg-center flex items-center justify-center bg-black bg-opacity-70"
-            style={{ backgroundImage: "url('/img/Frame.png')" }}
+            style={{ backgroundImage: "url('https://static.vecteezy.com/system/resources/thumbnails/041/646/113/small_2x/black-abstract-banner-background-with-glowing-geometric-circle-lines-modern-dark-grey-gradient-shiny-lines-pattern-and-futuristic-technology-web-background-for-brochure-cover-poster-header-png.png')" }}
         >
             <div className="text-center px-6 py-12 rounded-lg w-[911px]">
                 <img 
-                    src="/img/icon.png" 
+                    src="https://cdn-icons-png.flaticon.com/512/8002/8002111.png" 
                     alt="Game Icon" 
                     className="h-[145px] w-[151px] mx-auto mb-6" 
                 />
